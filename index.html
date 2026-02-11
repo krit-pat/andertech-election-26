@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnderTech 2026 Presidential Elections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* AnderTech Complete Palette */
+            --bg-primary: #0A192F;        /* Deep Navy - Main background */
+            --card-bg: #1E3A5F;           /* Deep Blue - Card backgrounds */
+            
+            /* Primary Actions */
+            --accent-yellow: #FFD500;     /* Bright Yellow - Primary CTA */
+            --accent-orange: #F5A623;     /* Orange - Hover states */
+            
+            /* Secondary Accents */
+            --accent-teal: #5A9E8F;       /* Teal/Sea Green - Success states */
+            --accent-coral: #FF7A5C;      /* Coral - Alert/New tags */
+            --accent-blue: #2B7CC4;       /* Bright Blue - Info */
+            --accent-periwinkle: #C5D9E8; /* Light Blue - Subtle highlights */
+            
+            /* Text */
+            --text-primary: #E6F1FF;      /* Light blue-white - Primary text */
+            --text-muted: #8892B0;        /* Grey-blue - Secondary text */
+            --text-dark: #3A3A3A;         /* Charcoal - On light backgrounds */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1f2e 100%);
+        }
+
+        .hero-logo {
+            max-width: 400px;
+            width: 80%;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 30px rgba(43, 124, 196, 0.3));
+        }
+
+        .hero-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2.5rem 0;
+            padding: 1.5rem 3rem;
+            background: rgba(30, 58, 95, 0.6);
+            border-radius: 50px;
+            border: 2px solid var(--accent-teal);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-stat-item {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            font-family: 'League Spartan', sans-serif;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .hero-stat-divider {
+            color: var(--accent-teal);
+            font-size: 2rem;
+            opacity: 0.5;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            margin: 2rem 0;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--accent-coral);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(30, 58, 95, 0.6);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--accent-coral);
+            backdrop-filter: blur(10px);
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+            font-family: 'League Spartan', sans-serif;
+            line-height: 1;
+        }
+
+        .countdown-unit {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+
+        .countdown-separator {
+            font-size: 2rem;
+            color: var(--accent-coral);
+            font-weight: 700;
+        }
+
+        /* Live Vote Notification */
+        .vote-notification {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: var(--accent-yellow);
+            color: #0A192F;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 10px 40px rgba(255, 213, 0, 0.4);
+            z-index: 999;
+            transform: translateX(400px);
+            transition: transform 0.5s ease;
+            font-weight: 700;
+        }
+
+        .vote-notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            font-size: 1.5rem;
+            animation: bounce 0.6s ease infinite;
+        }
+
+        .notification-text {
+            font-size: 1rem;
+            color: #0A192F;
+        }
+
+        
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: #0A192F;
+            padding: 1rem 3rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            font-size: 2rem;
+            color: var(--text-muted);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 8rem 2rem 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        section#candidates {
+            padding-top: 10rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            font-size: 1.1rem;
+        }
+
+        /* Turnout Tracker */
+        .voting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .voting-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(90, 158, 143, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .voting-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(90, 158, 143, 0.2);
+        }
+
+        .main-card {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #1a2f4a 100%);
+            border: 2px solid var(--accent-teal);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .voting-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Instant Runoff Process */
+        .instant-runoff-card {
+            padding: 2.5rem;
+        }
+
+        .process-intro {
+            color: var(--accent-teal);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(90, 158, 143, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-teal);
+        }
+
+        .runoff-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .runoff-step {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(30, 58, 95, 0.5);
+            border-radius: 12px;
+            border: 1px solid rgba(90, 158, 143, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .runoff-step:hover {
+            background: rgba(30, 58, 95, 0.8);
+            border-color: var(--accent-teal);
+            transform: translateX(5px);
+        }
+
+        .highlight-step {
+            background: rgba(90, 158, 143, 0.15);
+            border: 2px solid var(--accent-teal);
+        }
+
+        .step-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            color: #0A192F;
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'League Spartan', sans-serif;
+        }
+
+        .step-icon {
+            font-size: 2rem;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            font-family: 'League Spartan', sans-serif;
+        }
+
+        .step-content p {
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .step-content strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .highlight-yellow {
+            background: var(--accent-yellow);
+            color: #0A192F;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .highlight-teal {
+            background: var(--accent-teal);
+            color: #0A192F;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* Step Arrows */
+        .step-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.75rem 0;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+        }
+
+        .transfer-arrow {
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem 0;
+        }
+
+        .transfer-icon {
+            font-size: 2.5rem;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .transfer-arrow span {
+            color: var(--accent-teal);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .winner-arrow {
+            color: var(--accent-yellow);
+            font-size: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .winner-icon {
+            font-size: 2.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Winner State */
+        .winner-state {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 213, 0, 0.2), rgba(245, 166, 35, 0.2));
+            border-radius: 12px;
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .winner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent-yellow);
+            color: #0A192F;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-family: 'League Spartan', sans-serif;
+        }
+
+        .trophy-icon {
+            font-size: 1.5rem;
+        }
+
+        .winner-state p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Why Matters */
+        .why-matters {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(43, 124, 196, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-blue);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .why-matters strong {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+        }
+
+        .voting-detail {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-label {
+            color: var(--accent-teal);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .voting-detail p {
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Verification List */
+        .verification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .verification-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .check-mark {
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .verification-item strong {
+            color: var(--accent-blue);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .verification-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Integrity List */
+        .integrity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .integrity-item {
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid;
+        }
+
+        .integrity-item.warning {
+            background: rgba(245, 166, 35, 0.1);
+            border-color: var(--accent-orange);
+        }
+
+        .integrity-item.danger {
+            background: rgba(255, 122, 92, 0.1);
+            border-color: var(--accent-coral);
+        }
+
+        .integrity-item.success {
+            background: rgba(90, 158, 143, 0.1);
+            border-color: var(--accent-teal);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-icon {
+            color: var(--accent-orange);
+        }
+
+        .danger-icon {
+            color: var(--accent-coral);
+        }
+
+        .success-icon {
+            color: var(--accent-teal);
+        }
+
+        .integrity-item strong {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .integrity-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            margin-top: 4rem;
+            padding: 2.5rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid rgba(90, 158, 143, 0.2);
+        }
+
+        .timeline-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            border: 3px solid var(--bg-primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-dot.highlight {
+            width: 24px;
+            height: 24px;
+            background: var(--accent-yellow);
+            box-shadow: 0 0 20px rgba(255, 213, 0, 0.5);
+        }
+
+        .timeline-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            position: relative;
+            top: -35px;
+        }
+
+        .timeline-content {
+            text-align: center;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--accent-teal);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            max-width: 150px;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(90, 158, 143, 0.5);
+        }
+
+        .turnout-content p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-teal);
+            font-family: 'League Spartan', sans-serif;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Candidate Grid */
+        .candidate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .candidate-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(90, 158, 143, 0.2);
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(90, 158, 143, 0.3);
+        }
+
+        .candidate-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #0A192F, #1E3A5F);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 3rem;
+            border-bottom: 2px solid rgba(197, 217, 232, 0.3);
+            overflow: hidden;
+        }
+
+        .candidate-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .candidate-info {
+            padding: 1.5rem;
+        }
+
+        .candidate-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .candidate-position {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .candidate-emojis {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5rem;
+        }
+
+        .candidate-slogan {
+            color: var(--accent-teal);
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem;
+            background: rgba(90, 158, 143, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-teal);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--accent-blue);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--accent-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .secondary-button:hover {
+            background: var(--accent-blue);
+            color: #0A192F;
+        }
+
+        .music-button {
+            border-color: var(--accent-coral);
+            color: var(--accent-coral);
+        }
+
+        .music-button:hover {
+            background: var(--accent-coral);
+            color: #0A192F;
+        }
+
+        .roadmap-button {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+            font-weight: 700;
+        }
+
+        .roadmap-button:hover {
+            background: var(--accent-yellow);
+            color: #0A192F;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+
+        .modal h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        /* Fixed Voting Footer */
+        .voting-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            border-top: 2px solid var(--accent-teal);
+        }
+
+        .vote-button {
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-orange));
+            color: #0A192F;
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .vote-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero-logo {
+                max-width: 280px;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.25rem 2rem;
+                margin: 2rem 0;
+            }
+
+            .hero-stat-divider {
+                display: none;
+            }
+
+            .hero-stat-number {
+                font-size: 2rem;
+            }
+
+            .hero-stat-label {
+                font-size: 0.75rem;
+            }
+
+            .countdown-item {
+                padding: 0.75rem 1rem;
+                min-width: 60px;
+            }
+
+            .countdown-number {
+                font-size: 1.75rem;
+            }
+
+            .countdown-unit {
+                font-size: 0.65rem;
+            }
+
+            .countdown-separator {
+                font-size: 1.5rem;
+            }
+
+            .vote-notification {
+                bottom: 80px;
+                right: 15px;
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+
+
+
+
+            .voting-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .main-card {
+                grid-column: 1;
+            }
+
+            .instant-runoff-card {
+                padding: 1.5rem;
+            }
+
+            .runoff-step {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.25rem;
+            }
+
+            .step-header {
+                flex-direction: row;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .step-number {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+
+            .step-icon {
+                font-size: 1.5rem;
+            }
+
+            .step-content h4 {
+                font-size: 1.1rem;
+            }
+
+            .step-content p {
+                font-size: 0.95rem;
+            }
+
+            .transfer-icon {
+                font-size: 2rem;
+            }
+
+            .winner-badge {
+                font-size: 1rem;
+                padding: 0.6rem 1.5rem;
+            }
+
+            .process-intro {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .timeline-line {
+                width: 2px;
+                height: 50px;
+                top: 0;
+                background: linear-gradient(180deg, var(--accent-blue), var(--accent-teal));
+            }
+
+            .timeline-label {
+                max-width: 200px;
+            }
+
+            .candidate-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .voting-footer {
+                padding: 1rem;
+            }
+
+            .vote-button {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
+            }
+
+            .hero {
+                min-height: 90vh;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        /* Spotify Embed Styling */
+        .spotify-container {
+            margin-top: 1rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .spotify-container iframe {
+            border-radius: 12px;
+        }
+
+        /* Loading State */
+        .loading {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="AnderTech_Logo.png" alt="AnderTech Logo" class="hero-logo">
+        <h1>AnderTech 2026:<br>The Roadmap Starts Here</h1>
+        <p>Six visionaries. One community. Your vote shapes the next chapter of graduate tech leadership.</p>
+        
+        <!-- Live Vote Count in Hero -->
+        <div class="hero-stats">
+            <div class="hero-stat-item">
+                <div class="hero-stat-number" id="heroVotesCount">-</div>
+                <div class="hero-stat-label">Votes Cast</div>
+            </div>
+            <div class="hero-stat-divider">|</div>
+            <div class="hero-stat-item">
+                <div class="hero-stat-number" id="heroTurnoutPercent">-</div>
+                <div class="hero-stat-label">Turnout</div>
+            </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="countdown-container">
+            <div class="countdown-label">⏰ VOTING CLOSES IN</div>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="daysLeft">0</div>
+                    <div class="countdown-unit">Days</div>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hoursLeft">0</div>
+                    <div class="countdown-unit">Hours</div>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutesLeft">0</div>
+                    <div class="countdown-unit">Minutes</div>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="secondsLeft">0</div>
+                    <div class="countdown-unit">Seconds</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#candidates" class="cta-button">Meet the Candidates ↓</a>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- Live Vote Notification -->
+    <div class="vote-notification" id="voteNotification">
+        <div class="notification-icon">🎉</div>
+        <div class="notification-text" id="notificationText">New vote cast!</div>
+    </div>
+
+    <!-- Candidate Directory Section -->
+    <section id="candidates">
+        <h2 class="section-title">Meet the Candidates</h2>
+        <p class="section-subtitle">Your voice. Your choice. Your future.</p>
+        
+        <!-- 
+        NOTE: To use fewer candidates (4 or 5 instead of 6):
+        1. Simply delete the extra candidate card blocks below
+        2. The grid will automatically adjust to show the remaining candidates
+        3. Don't forget to also delete the corresponding modal sections at the bottom of this file
+        -->
+        
+        <div class="candidate-grid">
+            <!-- Candidate 1 -->
+            <div class="candidate-card">
+                <div class="candidate-image">
+                    <img src="charlotte-clark.jpg" alt="Charlotte Clark" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="candidate-info">
+                    <h3 class="candidate-name">Charlotte Clark</h3>
+                    <p class="candidate-position">Director of Operations and Member Experience</p>
+                    <div class="candidate-emojis">🛠️🌱🤝</div>
+                    <p class="candidate-slogan">"Every Builder Belongs Here"</p>
+                    <div class="button-group">
+                        <a href="candidate1-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal1')">🎵 Eye of The Tiger - Survivor</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 2 -->
+            <div class="candidate-card">
+                <div class="candidate-image">
+                    <img src="cemil-revan.jpg" alt="Cemil Revan" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="candidate-info">
+                    <h3 class="candidate-name">Cemil Revan</h3>
+                    <p class="candidate-position">Director of Easton Relations</p>
+                    <div class="candidate-emojis">🧑‍💻🤝🚀</div>
+                    <p class="candidate-slogan">"Raising the bar, earning our place, and opening doors together"</p>
+                    <div class="button-group">
+                        <a href="candidate2-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal2')">🎵 Push It To The Limit - Paul Engemann</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 3 -->
+            <div class="candidate-card">
+                <div class="candidate-image">
+                    <img src="brian-bagdasarian.jpg" alt="Brian Bagdasarian" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="candidate-info">
+                    <h3 class="candidate-name">Brian Bagdasarian</h3>
+                    <p class="candidate-position">Director of Tech Skills</p>
+                    <div class="candidate-emojis">🏛️🚀💙</div>
+                    <p class="candidate-slogan">"Get The Job. Grow Your Career. Hire Anderson."</p>
+                    <div class="button-group">
+                        <a href="candidate3-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal3')">🎵 The Grid - Daft Punk</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 4 -->
+            <div class="candidate-card">
+                <div class="candidate-image">
+                    <img src="shreya-vishwanath.jpg" alt="Shreya Vishwanath" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="candidate-info">
+                    <h3 class="candidate-name">Shreya Vishwanath</h3>
+                    <p class="candidate-position">Director of Recruiting</p>
+                    <div class="candidate-emojis">💪🤝🎉</div>
+                    <p class="candidate-slogan">"Show, Don't Tell: Arming everyone with skills and experiences to approach tech confidently 💪"</p>
+                    <div class="button-group">
+                        <a href="candidate4-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal4')">🎵 Back in Black - AC/DC</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidate 5 -->
+            <div class="candidate-card">
+                <div class="candidate-image">
+                    <img src="ateken-abla.jpg" alt="Ateken Abla" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="candidate-info">
+                    <h3 class="candidate-name">Ateken Abla</h3>
+                    <p class="candidate-position">Director of Industry Education</p>
+                    <div class="candidate-emojis">😌😎🤗</div>
+                    <p class="candidate-slogan">"Let's build a community driven by a passion for innovation."</p>
+                    <div class="button-group">
+                        <a href="candidate5-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal5')">🎵 365 - Charli xcx</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Voting Explanation Section -->
+    <section id="how-to-vote">
+        <h2 class="section-title">How Voting Works</h2>
+        <p class="section-subtitle">A transparent, fair, and professional election process.</p>
+        
+        <div class="voting-grid">
+            <!-- Instant Runoff Process - Full Width Featured Card -->
+            <div class="voting-card main-card instant-runoff-card">
+                <div class="card-icon">🗳️</div>
+                <h3>Transparent & Fair: The Instant-Runoff Process</h3>
+                <p class="process-intro">Your rankings ensure the new AnderTech President represents the broadest possible support of our community. Your second and third rankings are just as vital to the roadmap as your first.</p>
+                
+                <div class="runoff-steps">
+                    <!-- Step 1 -->
+                    <div class="runoff-step">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <div class="step-icon">📊</div>
+                        </div>
+                        <div class="step-content">
+                            <h4>The Initial Tally</h4>
+                            <p>We start by counting everyone's <strong>#1 Choice</strong>. If a candidate receives more than <span class="highlight-yellow">50% of first-choice votes</span>, they are declared the winner immediately.</p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer Arrow -->
+                    <div class="step-arrow">↓</div>
+
+                    <!-- Step 2 -->
+                    <div class="runoff-step">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <div class="step-icon">❌</div>
+                        </div>
+                        <div class="step-content">
+                            <h4>The Elimination Round</h4>
+                            <p>If no one reaches the majority, the candidate with the <strong>fewest #1 votes is eliminated</strong>. This ensures that every single vote is working toward a consensus.</p>
+                        </div>
+                    </div>
+
+                    <!-- Transfer Arrow -->
+                    <div class="step-arrow transfer-arrow">
+                        <div class="transfer-icon">🔄</div>
+                        <span>Vote Transfer</span>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="runoff-step highlight-step">
+                        <div class="step-header">
+                            <div class="step-number">3</div>
+                            <div class="step-icon">🔄</div>
+                        </div>
+                        <div class="step-content">
+                            <h4>Vote Redistribution</h4>
+                            <p>If your first-choice candidate was eliminated, <strong>your vote isn't lost</strong>. It automatically transfers to your <span class="highlight-teal">#2 Choice</span>. This cycle repeats until one candidate achieves a majority of the remaining votes.</p>
+                        </div>
+                    </div>
+
+                    <!-- Winner Arrow -->
+                    <div class="step-arrow winner-arrow">
+                        <div class="winner-icon">👑</div>
+                    </div>
+
+                    <!-- Winner State -->
+                    <div class="winner-state">
+                        <div class="winner-badge">
+                            <span class="trophy-icon">🏆</span>
+                            <strong>Winner Declared</strong>
+                        </div>
+                        <p>A candidate has achieved majority support and wins the election</p>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <strong>Why this matters:</strong> This system ensures the new AnderTech President represents the broadest possible support of our community. Your second and third rankings are just as vital to the roadmap as your first.
+                </div>
+            </div>
+
+            <!-- Verification -->
+            <div class="voting-card">
+                <div class="card-icon">✓</div>
+                <h3>Membership & Verification</h3>
+                <div class="verification-list">
+                    <div class="verification-item">
+                        <span class="check-mark">✓</span>
+                        <div>
+                            <strong>Eligibility</strong>
+                            <p>Only active, dues-paying AnderTech members can vote</p>
+                        </div>
+                    </div>
+                    <div class="verification-item">
+                        <span class="check-mark">✓</span>
+                        <div>
+                            <strong>Verification</strong>
+                            <p>UCLA emails verified against official club roster</p>
+                        </div>
+                    </div>
+                    <div class="verification-item">
+                        <span class="check-mark">✓</span>
+                        <div>
+                            <strong>One Response Rule</strong>
+                            <p>Strictly limited to one vote per verified email</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campaign Integrity -->
+            <div class="voting-card">
+                <div class="card-icon">⚖️</div>
+                <h3>Campaign Integrity Rules</h3>
+                <div class="integrity-list">
+                    <div class="integrity-item warning">
+                        <div class="item-header">
+                            <span class="warning-icon">⚠️</span>
+                            <strong>No Active Campaigning</strong>
+                        </div>
+                        <p>Candidates are prohibited from public posting, mass DMing, or unsolicited outreach for votes.</p>
+                    </div>
+                    <div class="integrity-item danger">
+                        <div class="item-header">
+                            <span class="danger-icon">🚫</span>
+                            <strong>Disqualification</strong>
+                        </div>
+                        <p>Breach of the "No Active Campaigning" rule may result in immediate disqualification.</p>
+                    </div>
+                    <div class="integrity-item success">
+                        <div class="item-header">
+                            <span class="success-icon">📊</span>
+                            <strong>Data Audit</strong>
+                        </div>
+                        <p>Manual audit on Feb 15 to remove duplicates or non-member entries before announcing the winner on Feb 16.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-container">
+            <h3 class="timeline-title">Election Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Now</div>
+                        <div class="timeline-label">Voting Open</div>
+                    </div>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Feb 15</div>
+                        <div class="timeline-label">Voting Closes & Audit Begins</div>
+                    </div>
+                </div>
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-dot highlight"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Feb 16</div>
+                        <div class="timeline-label">Winner Announced</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fixed Voting Footer -->
+    <div class="voting-footer">
+        <a href="https://forms.gle/9hqJVEH1Jo3ErkzUA" class="vote-button" target="_blank">Cast Your Ballot</a>
+    </div>
+
+    <!-- Modals for Spotify Embeds -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal1')">&times;</button>
+            <h3>Charlotte Clark's Walk-Up Song</h3>
+            <div class="spotify-container">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/btPJPFnesV4?si=XJm2TfL8vQqJrGKa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal2')">&times;</button>
+            <h3>Cemil Revan's Walk-Up Song</h3>
+            <div class="spotify-container">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/9D-QD_HIfjA?si=1kQB8LHv8cTnvjOw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal3')">&times;</button>
+            <h3>Brian Bagdasarian's Walk-Up Song</h3>
+            <div class="spotify-container">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/tFXYuw96d0c?si=jXVBqYaWjp5AH9Y8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal4')">&times;</button>
+            <h3>Shreya Vishwanath's Walk-Up Song</h3>
+            <div class="spotify-container">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/pAgnJDJN4VA?si=E7gxW0LLcKlGlmMa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('modal5')">&times;</button>
+            <h3>Ateken Abla's Walk-Up Song</h3>
+            <div class="spotify-container">
+                <iframe width="100%" height="200" src="https://www.youtube.com/embed/vYFqeXfHP5E?si=cJQp4HXmH9Fs0yxF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+
+        const CONFIG = {
+            // Replace this with your Google Sheets CSV URL
+            googleSheetURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3Aniaw3GZxkC085-zftHam4Qn7BUBVP_KOvsJ5GbgiAbMAvfh6X351ZL-eec7xd44HKCw4UPlSa1w/pub?output=csv',
+            
+            // Your total member count
+            totalMembers: 394,
+            
+            // Goal percentage
+            goalPercentage: 80,
+            
+            // How often to refresh (in milliseconds)
+            refreshInterval: 60000,
+
+            // VOTING DEADLINE
+            votingDeadline: 'February 15, 2026 23:59:59'
+        };
+
+        // ============================================
+        // LIVE VOTE NOTIFICATIONS
+        // ============================================
+
+        function showVoteNotification(votesCount) {
+            const notification = document.getElementById('voteNotification');
+            const notificationText = document.getElementById('notificationText');
+
+            const messages = [
+                '🎉 New vote just came in!',
+                '💫 Someone just voted!',
+                '🗳️ Fresh vote cast!',
+                '✨ Vote received!',
+                '🔥 Another vote counted!'
+            ];
+
+            notificationText.textContent = messages[Math.floor(Math.random() * messages.length)];
+            
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // ============================================
+        // COUNTDOWN TIMER
+        // ============================================
+
+        function updateCountdown() {
+            const deadline = new Date(CONFIG.votingDeadline).getTime();
+            const now = new Date().getTime();
+            const distance = deadline - now;
+
+            if (distance < 0) {
+                document.getElementById('daysLeft').textContent = '0';
+                document.getElementById('hoursLeft').textContent = '0';
+                document.getElementById('minutesLeft').textContent = '0';
+                document.getElementById('secondsLeft').textContent = '0';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('daysLeft').textContent = days;
+            document.getElementById('hoursLeft').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutesLeft').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('secondsLeft').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // ============================================
+        // DYNAMIC PROGRESS BAR CODE
+        // ============================================
+
+        let lastVoteCount = 0;
+
+        async function fetchTurnoutData() {
+            try {
+                const response = await fetch(CONFIG.googleSheetURL);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                console.log('CSV fetched successfully');
+                
+                // Parse CSV to get value from cell A2 (row 2, column 1)
+                const lines = csvText.trim().split('\n');
+                let votesCount = 0;
+                
+                if (lines.length >= 2) {
+                    // Get the second row (index 1)
+                    const row2 = lines[1].split(',');
+                    // Get first column (A2)
+                    const cellValue = row2[0].trim();
+                    console.log('Cell A2 value:', cellValue);
+                    // Parse as integer
+                    votesCount = parseInt(cellValue) || 0;
+                } else {
+                    console.warn('CSV has less than 2 rows');
+                }
+                
+                console.log('Votes count:', votesCount);
+                
+                const goalVotes = Math.ceil((CONFIG.totalMembers * CONFIG.goalPercentage) / 100);
+                const percentage = Math.min(100, Math.round((votesCount / CONFIG.totalMembers) * 100));
+                const remainingVotes = Math.max(0, goalVotes - votesCount);
+                
+                updateProgressBar(percentage, votesCount, remainingVotes);
+            } catch (error) {
+                console.error('Error fetching turnout data:', error);
+                // Set default values on error
+                updateProgressBar(0, 0, 0);
+            }
+        }
+
+        function updateProgressBar(percentage, votesCount, remainingVotes) {
+            const heroVotesCount = document.getElementById('heroVotesCount');
+            const heroTurnoutPercent = document.getElementById('heroTurnoutPercent');
+            
+            if (heroVotesCount && heroTurnoutPercent) {
+                setTimeout(() => {
+                    animateNumber(heroVotesCount, lastVoteCount, votesCount, 1000);
+                    heroTurnoutPercent.textContent = percentage + '%';
+
+                    if (votesCount > lastVoteCount && lastVoteCount > 0) {
+                        showVoteNotification(votesCount);
+                    }
+
+                    lastVoteCount = votesCount;
+                }, 300);
+            }
+        }
+
+        function animateNumber(element, start, end, duration) {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    element.textContent = end;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchTurnoutData();
+            setInterval(fetchTurnoutData, CONFIG.refreshInterval);
+        });
+
+        // ============================================
+        // MODAL FUNCTIONS
+        // ============================================
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // ============================================
+        // SMOOTH SCROLLING
+        // ============================================
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
