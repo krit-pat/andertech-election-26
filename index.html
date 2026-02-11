@@ -1527,46 +1527,16 @@ Cast Your Vote ✅</a>
         // ============================================
 
         const CONFIG = {
-            // Replace this with your Google Sheets CSV URL
             googleSheetURL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS3Aniaw3GZxkC085-zftHam4Qn7BUBVP_KOvsJ5GbgiAbMAvfh6X351ZL-eec7xd44HKCw4UPlSa1w/pub?output=csv',
-            
-            // Your total member count
             totalMembers: 394,
-            
-            // Goal percentage
             goalPercentage: 80,
-            
-            // How often to refresh (in milliseconds)
             refreshInterval: 60000,
-
-            // VOTING DEADLINE
-            votingDeadline: 'February 15, 2026 23:59:59'
+            votingDeadline: '2026-02-15T23:59:59'
         };
 
-        // ============================================
-        // LIVE VOTE NOTIFICATIONS
-        // ============================================
-
-        function showVoteNotification(votesCount) {
-            const notification = document.getElementById('voteNotification');
-            const notificationText = document.getElementById('notificationText');
-
-            const messages = [
-                '🎉 New vote just came in!',
-                '💫 Someone just voted!',
-                '🗳️ Fresh vote cast!',
-                '✨ Vote received!',
-                '🔥 Another vote counted!'
-            ];
-
-            notificationText.textContent = messages[Math.floor(Math.random() * messages.length)];
-            
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
+        let lastVoteCount = 0;
+        let scrollDepths = [25, 50, 75, 100];
+        let scrolledTo = [];
 
         // ============================================
         // COUNTDOWN TIMER
@@ -1596,17 +1566,37 @@ Cast Your Vote ✅</a>
             document.getElementById('secondsLeft').textContent = seconds.toString().padStart(2, '0');
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
         // ============================================
-        // DYNAMIC PROGRESS BAR CODE
+        // VOTE NOTIFICATIONS
         // ============================================
 
-        let lastVoteCount = 0;
+        function showVoteNotification(votesCount) {
+            const notification = document.getElementById('voteNotification');
+            const notificationText = document.getElementById('notificationText');
+
+            const messages = [
+                '🎉 New vote just came in!',
+                '💫 Someone just voted!',
+                '🗳️ Fresh vote cast!',
+                '✨ Vote received!',
+                '🔥 Another vote counted!'
+            ];
+
+            notificationText.textContent = messages[Math.floor(Math.random() * messages.length)];
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // ============================================
+        // VOTE TRACKING
+        // ============================================
 
         async function fetchTurnoutData() {
             try {
+                console.log('Fetching from:', CONFIG.googleSheetURL);
                 const response = await fetch(CONFIG.googleSheetURL);
                 
                 if (!response.ok) {
@@ -1616,17 +1606,13 @@ Cast Your Vote ✅</a>
                 const csvText = await response.text();
                 console.log('CSV fetched successfully');
                 
-                // Parse CSV to get value from cell A2 (row 2, column 1)
                 const lines = csvText.trim().split('\n');
                 let votesCount = 0;
                 
                 if (lines.length >= 2) {
-                    // Get the second row (index 1)
                     const row2 = lines[1].split(',');
-                    // Get first column (A2)
                     const cellValue = row2[0].trim();
                     console.log('Cell A2 value:', cellValue);
-                    // Parse as integer
                     votesCount = parseInt(cellValue) || 0;
                 } else {
                     console.warn('CSV has less than 2 rows');
@@ -1641,7 +1627,6 @@ Cast Your Vote ✅</a>
                 updateProgressBar(percentage, votesCount, remainingVotes);
             } catch (error) {
                 console.error('Error fetching turnout data:', error);
-                // Set default values on error
                 updateProgressBar(0, 0, 0);
             }
         }
@@ -1681,15 +1666,6 @@ Cast Your Vote ✅</a>
         }
 
         // ============================================
-        // INITIALIZATION
-        // ============================================
-
-        document.addEventListener('DOMContentLoaded', function() {
-            fetchTurnoutData();
-            setInterval(fetchTurnoutData, CONFIG.refreshInterval);
-        });
-
-        // ============================================
         // MODAL FUNCTIONS
         // ============================================
 
@@ -1723,12 +1699,10 @@ Cast Your Vote ✅</a>
                 }
             });
         });
+
         // ============================================
-        // GOOGLE ANALYTICS - SCROLL DEPTH TRACKING
+        // GOOGLE ANALYTICS - SCROLL TRACKING
         // ============================================
-        
-        let scrollDepths = [25, 50, 75, 100];
-        let scrolledTo = [];
 
         window.addEventListener('scroll', function() {
             const scrollPercentage = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
@@ -1745,10 +1719,19 @@ Cast Your Vote ✅</a>
         });
 
         // ============================================
-        // GOOGLE ANALYTICS - CTA BUTTON TRACKING
+        // INITIALIZATION
         // ============================================
-        
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Start countdown timer
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            
+            // Start vote tracking
+            fetchTurnoutData();
+            setInterval(fetchTurnoutData, CONFIG.refreshInterval);
+            
+            // Google Analytics - CTA button
             const ctaButton = document.querySelector('.cta-button');
             if (ctaButton) {
                 ctaButton.addEventListener('click', function() {
@@ -1759,7 +1742,6 @@ Cast Your Vote ✅</a>
                 });
             }
         });
-```
     </script>
 
 </body>
