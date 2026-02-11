@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnderTech 2026-27 Presidential Elections</title>
+        <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVZB09BWDR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-NVZB09BWDR');
+    </script>
+    <!-- End Google Analytics -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -1205,8 +1214,9 @@
                     <div class="candidate-emojis">🛠️🌱🤝</div>
                     <p class="candidate-slogan">"Every Builder Belongs Here"</p>
                     <div class="button-group">
-                        <a href="candidate1-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
-                        <button class="secondary-button music-button" onclick="openModal('modal1')">🎵 Eye of The Tiger - Survivor</button>
+                        <a href="candidate1-roadmap.pdf" class="secondary-button roadmap-button" target="_blank" onclick="gtag('event', 'pdf_download', {'event_category': 'engagement', 'event_label': 'Charlotte Clark Roadmap'});">
+📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal1'); gtag('event', 'song_play', {'event_category': 'engagement', 'event_label': 'Charlotte Clark - Eye of The Tiger'});">🎵 Eye of The Tiger - Survivor</button>
                     </div>
                 </div>
             </div>
@@ -1222,8 +1232,9 @@
                     <div class="candidate-emojis">🧑‍💻🤝🚀</div>
                     <p class="candidate-slogan">"Raising the bar, earning our place, and opening doors together"</p>
                     <div class="button-group">
-                        <a href="candidate2-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
-                        <button class="secondary-button music-button" onclick="openModal('modal2')">🎵 Push It To The Limit - Paul Engemann</button>
+                        <a href="candidate2-roadmap.pdf" class="secondary-button roadmap-button" target="_blank" onclick="gtag('event', 'pdf_download', {'event_category': 'engagement', 'event_label': 'Cemil Revan Roadmap'});">
+📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal2'); gtag('event', 'song_play', {'event_category': 'engagement', 'event_label': 'Cemil Revan - Push It To The Limit'});">🎵 Push It To The Limit - Paul Engemann</button>
                     </div>
                 </div>
             </div>
@@ -1239,8 +1250,9 @@
                     <div class="candidate-emojis">🏛️🚀💙</div>
                     <p class="candidate-slogan">"Get The Job. Grow Your Career. Hire Anderson."</p>
                     <div class="button-group">
-                        <a href="candidate3-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
-                        <button class="secondary-button music-button" onclick="openModal('modal3')">🎵 The Grid - Daft Punk</button>
+                        <a href="candidate3-roadmap.pdf" class="secondary-button roadmap-button" target="_blank" onclick="gtag('event', 'pdf_download', {'event_category': 'engagement', 'event_label': 'Brian Bagdasarian Roadmap'});">
+📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal3'); gtag('event', 'song_play', {'event_category': 'engagement', 'event_label': 'Brian Bagdasarian - The Grid'});">🎵 The Grid - Daft Punk</button>
                     </div>
                 </div>
             </div>
@@ -1256,8 +1268,9 @@
                     <div class="candidate-emojis">💪🤝🎉</div>
                     <p class="candidate-slogan">"Show, Don't Tell: Arming everyone with skills and experiences to approach tech confidently 💪"</p>
                     <div class="button-group">
-                        <a href="candidate4-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
-                        <button class="secondary-button music-button" onclick="openModal('modal4')">🎵 Back in Black - AC/DC</button>
+                        <a href="candidate4-roadmap.pdf" class="secondary-button roadmap-button" target="_blank" onclick="gtag('event', 'pdf_download', {'event_category': 'engagement', 'event_label': 'Shreya Vishwanath Roadmap'});">
+📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal4'); gtag('event', 'song_play', {'event_category': 'engagement', 'event_label': 'Shreya Vishwanath - Back in Black'});">🎵 Back in Black - AC/DC</button>
                     </div>
                 </div>
             </div>
@@ -1273,8 +1286,9 @@
                     <div class="candidate-emojis">😌😎🤗</div>
                     <p class="candidate-slogan">"Let's build a community driven by a passion for innovation."</p>
                     <div class="button-group">
-                        <a href="candidate5-roadmap.pdf" class="secondary-button roadmap-button" target="_blank">📄 View Product Roadmap</a>
-                        <button class="secondary-button music-button" onclick="openModal('modal5')">🎵 365 - Charli xcx</button>
+                        <a href="candidate5-roadmap.pdf" class="secondary-button roadmap-button" target="_blank" onclick="gtag('event', 'pdf_download', {'event_category': 'engagement', 'event_label': 'Ateken Abla Roadmap'});">
+📄 View Product Roadmap</a>
+                        <button class="secondary-button music-button" onclick="openModal('modal5'); gtag('event', 'song_play', {'event_category': 'engagement', 'event_label': 'Ateken Abla - 365'});">🎵 365 - Charli xcx</button>
                     </div>
                 </div>
             </div>
@@ -1452,7 +1466,8 @@
 
     <!-- Fixed Voting Footer -->
     <div class="voting-footer">
-        <a href="https://forms.gle/9hqJVEH1Jo3ErkzUA" class="vote-button" target="_blank">Cast Your Vote</a>
+        <a href="https://forms.gle/9hqJVEH1Jo3ErkzUA" class="vote-button" target="_blank" onclick="gtag('event', 'vote_button_click', {'event_category': 'conversion', 'event_label': 'Cast Your Vote'});">
+Cast Your Vote ✅</a>
     </div>
 
     <!-- Modals for Spotify Embeds -->
@@ -1708,6 +1723,43 @@
                 }
             });
         });
+        // ============================================
+        // GOOGLE ANALYTICS - SCROLL DEPTH TRACKING
+        // ============================================
+        
+        let scrollDepths = [25, 50, 75, 100];
+        let scrolledTo = [];
+
+        window.addEventListener('scroll', function() {
+            const scrollPercentage = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            
+            scrollDepths.forEach(depth => {
+                if (scrollPercentage >= depth && !scrolledTo.includes(depth)) {
+                    scrolledTo.push(depth);
+                    gtag('event', 'scroll_depth', {
+                        'event_category': 'engagement',
+                        'event_label': depth + '%'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // GOOGLE ANALYTICS - CTA BUTTON TRACKING
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function() {
+                    gtag('event', 'cta_click', {
+                        'event_category': 'engagement',
+                        'event_label': 'Meet the Candidates'
+                    });
+                });
+            }
+        });
+```
     </script>
 
 </body>
